@@ -138,7 +138,8 @@
 	var csrftoken = getCookie('csrftoken');
     var userid=null
     function getUser(){
-        var endPoint='http://127.0.0.1:8000/api/check';
+		var endPoint='https://taskmanager147.herokuapp.com/api/check'
+        //var endPoint='http://127.0.0.1:8000/api/check';
          fetch(endPoint)
         .then((resp) => resp.json())
         .then(function(data){
@@ -155,7 +156,8 @@
     function getData(){
         var wrapper = document.getElementById('list-wrapper');
         wrapper.innerHTML=''
-        var getEndPoint='http://127.0.0.1:8000/api';
+		var getEndPoint='https://taskmanager147.herokuapp.com/api'
+        //var getEndPoint='http://127.0.0.1:8000/api';
         fetch(getEndPoint)
         .then((resp) => resp.json())
         .then(function(data){
@@ -212,9 +214,11 @@
 			e.preventDefault()
 			console.log('Form submitted')
             var mtd ='POST'
-			var url = 'http://127.0.0.1:8000/api/'
+			var url='https://taskmanager147.herokuapp.com/api'
+			//var url = 'http://127.0.0.1:8000/api/'
             if (activeItem!=null){
-                url = `http://127.0.0.1:8000/api/update/${activeItem.id}`
+                //url = `http://127.0.0.1:8000/api/update/${activeItem.id}`
+				url=`https://taskmanager147.herokuapp.com/api/update/${activeItem.id}`
                 mtd = 'PUT'
             }
 			var title = document.getElementById('title').value
@@ -242,7 +246,9 @@
 
         function deleteItem(item){
 			console.log('Delete clicked')
-			fetch(`http://127.0.0.1:8000/api/update/${item.id}`, {
+			//var url=`http://127.0.0.1:8000/api/update/${item.id}`
+			var url = `https://taskmanager147.herokuapp.com/api/update/${item.id}`
+			fetch(url, {
 				method:'DELETE', 
 				headers:{
 					'Content-type':'application/json',
@@ -255,9 +261,10 @@
 
         function strikeUnstrike(item){
 			console.log('Strike clicked')
-
+			var url =`https://taskmanager147.herokuapp.com/api/update/${item.id}`
+			//var url = `http://127.0.0.1:8000/api/update/${item.id}`
 			item.isCompleted = !item.isCompleted
-			fetch(`http://127.0.0.1:8000/api/update/${item.id}`, {
+			fetch(url, {
 				method:'PUT', 
 				headers:{
 					'Content-type':'application/json',
